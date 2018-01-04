@@ -37,7 +37,7 @@
                 <div class="right-lines"></div>
                 <div class="inner">
                     <div class="course-con">
-                        <div v-for="(item, index) in courseArr" :class='{"course":course,"cloud":cloud}' @click="showCloud(index)">
+                        <div v-for="(item, index) in courseArr" class="course" :class='{"cloud":index==isActive}' @click="showCloud(index)">
                             <nuxt-link :to="item" target="_blank"></nuxt-link>
                         </div>
                     </div>
@@ -55,6 +55,7 @@ export default {
         return{
             course:true,
             cloud:false,
+            isActive:0,
             courseArr:["/course/1186","/course/1182","/course/1184","/course/483","/course/397","/course/417","/course/519","/course/553","/course/135","/course/1266","/course/1267","/course/1286"]
         }
     },
@@ -65,11 +66,12 @@ export default {
     },
     methods:{
         showCloud(index){
-            let allCourse=document.getElementsByClassName("course");
-            for(let i=0;i<allCourse.length;i++){
-                allCourse[i].className="course";
-            }
-            allCourse[index].className="course cloud"
+            this.isActive = index ||0;
+            // let allCourse=this.$el.getElementsByClassName("course");
+            // for(let i=0;i<allCourse.length;i++){
+            //     allCourse[i].className="course";
+            // }
+            // allCourse[index].className="course cloud"
         }
     }
 }
@@ -183,9 +185,10 @@ export default {
         }
         .course-wrap .inner{
             background: url("../../static/images/active_sign/course_pc.png") no-repeat center bottom;
-            background-size: 100%;
+            background-size: 100% 100%;
             position: relative;
             z-index: 9;
+            height: 1460px;
         }
         .course-wrap .right-lines{
             width: 30%;
@@ -344,9 +347,10 @@ export default {
         }
         .course-wrap .inner{
             background: url("../../static/images/active_sign/course_pc.png") no-repeat center bottom;
-            background-size: 100%;
+            background-size: 100% 100%;
             position: relative;
             z-index: 9;
+            height: 910px;
         }
         .course-wrap .right-lines{
             width: 30%;
@@ -434,6 +438,9 @@ export default {
         }
         .active-con .top-cloud{
             top:1500px;
+        }
+        .course-wrap .inner{
+            height: 1224px;
         }
     }
 </style>
